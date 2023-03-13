@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://wo1cvonsap1c"]
+
+[ext_resource type="Script" path="res://Game Assets/Game/game.gd" id="1_1lpup"]
+
+[sub_resource type="Animation" id="Animation_nr5se"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI_Canvas/UI/Transition_Black_Screen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tfwxu"]
+resource_name = "Transition"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_stage_transition"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI_Canvas/UI/Transition_Black_Screen:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q4fxn"]
+_data = {
+"RESET": SubResource("Animation_nr5se"),
+"Transition": SubResource("Animation_tfwxu")
+}
+
+[node name="Game" type="Node"]
+script = ExtResource("1_1lpup")
+
+[node name="Stage" type="Node2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+
+[node name="Stage_Transition_Player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q4fxn")
+}
+
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI_Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Transition_Black_Screen" type="ColorRect" parent="UI_Canvas/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="BGM_Player" type="AudioStreamPlayer" parent="."]

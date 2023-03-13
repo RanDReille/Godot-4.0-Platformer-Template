@@ -1,0 +1,201 @@
+[gd_scene load_steps=29 format=3 uid="uid://dqa4spgy6njg4"]
+
+[ext_resource type="Script" path="res://Game Assets/Player/player.gd" id="1_8g6d3"]
+[ext_resource type="Texture2D" uid="uid://cbye1oatjam66" path="res://Game Assets/Player/Player.png" id="1_psw6y"]
+[ext_resource type="Script" path="res://Game Assets/Player/state_player_idle.gd" id="2_ra6gg"]
+[ext_resource type="Script" path="res://Game Assets/Player/state_player_run.gd" id="3_7kha8"]
+[ext_resource type="Script" path="res://Game Assets/Player/state_player_air.gd" id="4_x2hyh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgo50"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0itq"]
+size = Vector2(32, 48)
+
+[sub_resource type="Animation" id="Animation_akpeu"]
+resource_name = "Falling"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Falling"]
+}
+
+[sub_resource type="Animation" id="Animation_n5x2d"]
+resource_name = "Idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_shwbg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Falling"]
+}
+
+[sub_resource type="Animation" id="Animation_r76tw"]
+resource_name = "Rising"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Rising"]
+}
+
+[sub_resource type="Animation" id="Animation_e0a2u"]
+resource_name = "Run"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mddna"]
+_data = {
+"Falling": SubResource("Animation_akpeu"),
+"Idle": SubResource("Animation_n5x2d"),
+"RESET": SubResource("Animation_shwbg"),
+"Rising": SubResource("Animation_r76tw"),
+"Run": SubResource("Animation_e0a2u")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i2uir"]
+animation = &"Falling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0osm4"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_blexu"]
+animation = &"Rising"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wql7"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c0spo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rpan5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m08uw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_74mlr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ty20m"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_560dm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r2miv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ovjru"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jvhm7"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8pw1r"]
+states/Falling/node = SubResource("AnimationNodeAnimation_i2uir")
+states/Falling/position = Vector2(695.556, 41.8025)
+states/Idle/node = SubResource("AnimationNodeAnimation_0osm4")
+states/Idle/position = Vector2(534.667, 147.333)
+states/Rising/node = SubResource("AnimationNodeAnimation_blexu")
+states/Rising/position = Vector2(535.111, 42.3704)
+states/Run/node = SubResource("AnimationNodeAnimation_6wql7")
+states/Run/position = Vector2(694.667, 146.741)
+states/Start/position = Vector2(375.333, 101.481)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_c0spo"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_rpan5"), "Idle", "Rising", SubResource("AnimationNodeStateMachineTransition_m08uw"), "Run", "Falling", SubResource("AnimationNodeStateMachineTransition_74mlr"), "Rising", "Falling", SubResource("AnimationNodeStateMachineTransition_ty20m"), "Falling", "Idle", SubResource("AnimationNodeStateMachineTransition_560dm"), "Falling", "Run", SubResource("AnimationNodeStateMachineTransition_r2miv"), "Run", "Rising", SubResource("AnimationNodeStateMachineTransition_ovjru"), "Idle", "Falling", SubResource("AnimationNodeStateMachineTransition_jvhm7")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_6uinu"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_8g6d3")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("2_ra6gg")
+
+[node name="Run" type="Node" parent="States"]
+script = ExtResource("3_7kha8")
+
+[node name="Air" type="Node" parent="States"]
+script = ExtResource("4_x2hyh")
+
+[node name="body" type="CanvasGroup" parent="."]
+
+[node name="main" type="Sprite2D" parent="body"]
+texture = ExtResource("1_psw6y")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rgo50")
+
+[node name="Water_Check" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="collision" type="CollisionShape2D" parent="Water_Check"]
+shape = SubResource("RectangleShape2D_c0itq")
+
+[node name="MovementAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mddna")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_8pw1r")
+anim_player = NodePath("../MovementAnimation")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_6uinu")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+size_flags_horizontal = 4
+text = "Falling"
+horizontal_alignment = 1
+vertical_alignment = 1
